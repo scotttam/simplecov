@@ -81,7 +81,10 @@ module SimpleCov
     def initialize(filename, coverage)
       @filename = filename
       @coverage = coverage
-      File.open(filename, "rb") { |f| @src = f.readlines }
+      puts "Simplecov opening: #{filename}"
+      File.open(filename, "rb") do |f|
+        @src = f.readlines
+      end
     end
 
     # Returns all source lines for this file as instances of SimpleCov::SourceFile::Line,
