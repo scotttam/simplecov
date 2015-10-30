@@ -81,7 +81,8 @@ module SimpleCov
     def initialize(filename, coverage)
       @filename = filename
       @coverage = coverage
-      puts "Simplecov opening: #{filename}"
+      output = `free -oh`.split(' ')
+      puts "Simplecov opening: #{filename}     #{output[9]}"
       File.open(filename, "rb") do |f|
         @src = f.readlines
       end
