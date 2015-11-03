@@ -81,8 +81,15 @@ module SimpleCov
     def initialize(filename, coverage)
       @filename = filename
       @coverage = coverage
-      output = `free -oh`.split(' ')
-      puts "Simplecov opening: #{filename}     #{output[9]}"
+      free_mem = 'N/A'
+
+      #Don't do this on Mac OSX
+      if (/darwin/ =~ RUBY_PLATFORM) == nil
+        output = `free -oh`.split(' ')
+        free_mem = output[9]
+      end
+
+      puts "Simplecov opening: #{filename}     #{free_mem}"
       File.open(filename, "rb") do |f|
         @src = f.readlines
       end
